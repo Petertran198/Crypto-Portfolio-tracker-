@@ -1,0 +1,29 @@
+<h1>Crypto Currency Look Up</h1>
+<br>
+<!-- form for lookup_path which is lookup method that does POST  -->
+<%= form_tag lookup_path, method: 'POST' do %>
+  <%= text_field_tag 'sym', nil, placeholder: "Enter A Crypto Symbol", size: 50 %>
+  <%= submit_tag "Look up Stock Quote" %>
+
+<% end %>
+
+<br>
+
+
+<% if @symbol %>
+  <% @x = true %>
+  <!-- loop through json list of crypto-->
+  <% @lookup_coin.each do |num| %>
+    <!-- if the symbol entered in the form is equal the json list symbol then-->
+      <% if @symbol == num['symbol']%>
+        Rank <%= num['rank'] %> . 
+        <%= num['name']%> :
+        $<%= (num['price_usd']).to_f.round(3)%> <br>
+      <% end %>
+
+  <% end %>
+  <% if @x == false %>
+    Please enter
+  <% end %>
+
+<% end %>  

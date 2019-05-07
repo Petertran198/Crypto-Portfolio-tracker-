@@ -9,8 +9,9 @@
   <% for coin in @my_coins %>
   <!-- if my coin is equal to the name of one of the json crypto list symbol then...-->
     <% if coin == num['symbol']%>
+      Rank <%= num['rank'] %> . 
       <%= num['name']%> :
-      $<%= num['price_usd']%> <br>
+      $<%= (num['price_usd']).to_f.round(3)%> <br>
 
     <% end %>
   <% end %>
