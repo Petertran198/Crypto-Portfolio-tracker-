@@ -1,6 +1,10 @@
 <% flash.each do |name,msg| %>
-  <div class="alert alert-primary" role="alert">
-    <%= msg %>
+  <div class="alert alert-warning alert-dismissible" role="alert">
+    <!-- flash msg with an x to close -->
+    <button class="close" data-dismiss="alert">
+        <%= fa_icon "times-circle"%>
+    </button>
+        <%= content_tag(:div, msg) %>
   </div>
 
 <% end %>

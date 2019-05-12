@@ -63,3 +63,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'bootstrap', '~> 4.3', '>= 4.3.1'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 gem 'devise', '~> 4.6', '>= 4.6.2'
+gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.5'
+gem 'tran_view_tool', git: 'https://github.com/Petertran198/tran_view_tool'

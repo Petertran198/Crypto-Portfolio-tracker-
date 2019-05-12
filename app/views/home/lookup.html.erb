@@ -1,9 +1,17 @@
-<h1>Crypto Currency Look Up</h1>
+<h1 class="lead mt-3 ">Crypto Currency Look Up</h1>
 <br>
 <!-- form for lookup_path which is lookup method that does POST  -->
 <%= form_tag lookup_path, method: 'POST' do %>
-  <%= text_field_tag 'sym', nil, placeholder: "Enter A Crypto Symbol", size: 50 %>
-  <%= submit_tag "Look up Stock Quote" %>
+<div class="row">
+  <div class="col-md-8">
+    <%= text_field_tag 'sym', nil, placeholder: "Enter A Crypto Symbol", class: "form-control" %>
+  </div>
+  <div class="col-md-3">
+      <%= submit_tag "Look up Stock Quote",class: 'btn btn-primary' %>
+
+  </div>
+</div><!-- end of row -->
+
 
 <% end %>
 
