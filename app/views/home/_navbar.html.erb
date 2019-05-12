@@ -17,20 +17,24 @@
         <li class="nav-item">
           <%= link_to 'Look Up', lookup_path, class: 'nav-link ' %> 
         </li>
-      <% if user_signed_in? %>
         <li>
-          <%= link_to '| Edit Profile',edit_user_registration_path,class: "nav-link"%>
+          <%= link_to 'My Cryptos',crypto_portfolios_path,class: "nav-link"%>
+        </li>  
+      <% if user_signed_in? %>
+            
+        <li>
+          <%= link_to ' Edit Profile',edit_user_registration_path,class: "nav-link border-left border-secondary"%>
         </li>      
         <li class="nav-item">
           <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: 'nav-link ' %> 
         </li>
       <% else %>
-        <li>
-          <%= link_to '| Log In',new_user_session_path,class: "nav-link"%>
-        </li>
-        <li>
-          <%= link_to 'Sign Up',new_user_registration_path,class: "nav-link"%>
-        </li>
+          <li>
+            <%= link_to ' Log In',new_user_session_path,class: "nav-link  border-left  border-secondary" %>
+          </li>
+          <li>
+            <%= link_to 'Sign Up',new_user_registration_path,class: "nav-link"%>
+          </li>
       <% end %>
 
       </ul>
