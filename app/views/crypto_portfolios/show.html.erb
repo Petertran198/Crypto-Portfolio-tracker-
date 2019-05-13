@@ -20,5 +20,7 @@
   <%= @crypto_portfolio.amount_owned %>
 </p>
 
-<%= link_to 'Edit', edit_crypto_portfolio_path(@crypto_portfolio) %> |
+<%= link_to 'Edit', edit_crypto_portfolio_path(@crypto_portfolio), class: "text-success" %> |
+<%= link_to 'Delete', crypto_portfolio_path, method: :delete, data: { confirm: 'Are you sure?' } , class: "text-danger"%> |
 <%= link_to 'Back', crypto_portfolios_path %>
+

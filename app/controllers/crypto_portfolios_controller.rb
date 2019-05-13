@@ -1,12 +1,21 @@
 class CryptoPortfoliosController < ApplicationController
   before_action :set_crypto_portfolio, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-
+  before_action :correct_user, only: [:edit,:update,:destroy, :show]
 
   # GET /crypto_portfolios
   # GET /crypto_portfolios.json
   def index
     @crypto_portfolios = CryptoPortfolio.all
+    ## To Read and get data from the api and convert json to readable language 
+    require 'net/http'
+    require 'json'
+    @url = 'https://api.coinmarketcap.com/v1/ticker/'
+    @uri = URI(@url)
+    # Get the uri 
+    @response = Net::HTTP.get(@uri)
+    #parse the json
+    @lookup_crypto = JSON.parse(@response) 
   end
 
   # GET /crypto_portfolios/1
@@ -73,4 +82,10 @@ class CryptoPortfoliosController < ApplicationController
     def crypto_portfolio_params
       params.require(:crypto_portfolio).permit(:symbol, :user_id, :cost_per, :amount_owned)
     end
+
+    def correct_user
+      @correct = current_user.crypto_portfolios.find_by(id: params[:id])
+      redirect_to crypto_portfolios_path , notice: "Not authorized to edit this entry." if @correct.nil?
+    end
+
 end
