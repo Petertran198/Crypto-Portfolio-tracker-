@@ -1,13 +1,48 @@
 <p id="notice"><%= notice %></p>
 
+  <% for x in @show_crypto %>
+    <% if @crypto_portfolio.symbol.upcase == x['symbol']%>
+
+      <% @rank = x['rank'] %>  
+      <% @name =x['name']%> 
+      <% @price = (x['price_usd']).to_f.round(3)%> 
+    <% end %>
+  <% end %>
+<div class="card" >
+  <div class="card-header">
+     <h2 class="card-title"><%= @crypto_portfolio.symbol.upcase %> | Rank:<%= @rank.to_i.ordinalize %></h2>   
+  </div>
+  <div class="card-body">
+
+    <h6 class="card-subtitle mb-2 text-muted">Cost Per:  <%= number_to_currency @price %></h6>
+    <h6 class="card-subtitle mb-2 text-muted">Current Cost:  <%= number_to_currency @crypto_portfolio.cost_per %></h6>
+    <h6 class="card-subtitle mb-2 text-muted">Amount Owned: <%= @crypto_portfolio.amount_owned %></h6>
+    <h6 class="card-subtitle mb-2 text-muted">Profit/Loss: <% if (@price - @crypto_portfolio.cost_per) > 1 %> +
+              <%= @price - @crypto_portfolio.cost_per %></h6>
+            <% else %> -
+              <%= @price - @crypto_portfolio.cost_per %></h6>
+            <% end %>
+
+  </div>
+  <div class="card-footer">
+    <%= link_to 'Edit', edit_crypto_portfolio_path(@crypto_portfolio), class: "text-success card-link" %> 
+    <%= link_to 'Delete', crypto_portfolio_path, method: :delete, data: { confirm: 'Are you sure?' } , class: "text-danger card-link"%> 
+    
+      <%= link_to 'Back', crypto_portfolios_path, class: "btn btn-sm btn-link card-link"%> 
+     
+  </div>
+</div>
+  
+
+
+
+
+
+
+<!--
 <p>
   <strong>Symbol:</strong>
   <%= @crypto_portfolio.symbol %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @crypto_portfolio.user_id %>
 </p>
 
 <p>
@@ -21,6 +56,5 @@
 </p>
 
 <%= link_to 'Edit', edit_crypto_portfolio_path(@crypto_portfolio), class: "text-success" %> |
-<%= link_to 'Delete', crypto_portfolio_path, method: :delete, data: { confirm: 'Are you sure?' } , class: "text-danger"%> |
-<%= link_to 'Back', crypto_portfolios_path %>
 
+-->

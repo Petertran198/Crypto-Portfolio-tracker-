@@ -1,3 +1,4 @@
+<% profit_loss ||= 0 %>
 
 <h1 class="h1-style text-center my-3">My Portfolios</h1>
 
@@ -42,6 +43,7 @@
                 %></td>
                 <td><%= number_to_currency(crypto_portfolio.cost_per * crypto_portfolio.amount_owned) %></td>
                 <td><%= number_to_currency((x['price_usd'].to_f * crypto_portfolio.amount_owned) -(crypto_portfolio.cost_per * crypto_portfolio.amount_owned )) %></td>
+                <% @profit_loss += (x['price_usd'].to_f * crypto_portfolio.amount_owned) -(crypto_portfolio.cost_per * crypto_portfolio.amount_owned )%>
 
               <% end %>
             <% end %>      
@@ -56,6 +58,13 @@
     </tbody>
   </table>
 </div>
-<br>
 
-<%= link_to 'Add New Crypto', new_crypto_portfolio_path %>
+<hr>
+<div class="row">
+  <div class="col-md-6">
+    <%= link_to 'Add New Crypto', new_crypto_portfolio_path %>
+  </div>
+  <div class="col-md-6 text-right">
+    <strong class="font-weight-bold">Total Profits/Loss: <%= number_to_currency @profit_loss %></strong>
+  </div>
+</div>

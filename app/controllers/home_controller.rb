@@ -8,11 +8,10 @@ class HomeController < ApplicationController
     @response = Net::HTTP.get(@uri)
     #parse the json
     @coins = JSON.parse(@response)
-    @my_coins = ["BTC","XRP","ADA","XLM","STEEM"]
+    @my_coins = ["BTC","XRP","ADA","XLM","LTC"]
+
   end
 
-  def about
-  end
 
   def lookup
     require 'net/http'

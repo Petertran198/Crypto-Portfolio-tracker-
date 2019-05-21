@@ -15,12 +15,32 @@ class CryptoPortfoliosController < ApplicationController
     # Get the uri 
     @response = Net::HTTP.get(@uri)
     #parse the json
-    @lookup_crypto = JSON.parse(@response) 
+    @lookup_crypto = JSON.parse(@response)
+
+    @profit_loss ||= 0 #If profit loss is nill/ aka not set, set to 0
   end
 
   # GET /crypto_portfolios/1
   # GET /crypto_portfolios/1.json
   def show
+    @crypto_portfolios = CryptoPortfolio.all
+    ## To Read and get data from the api and convert json to readable language 
+    require 'net/http'
+    require 'json'
+    @url = 'https://api.coinmarketcap.com/v1/ticker/'
+    @uri = URI(@url)
+    # Get the uri 
+    @response = Net::HTTP.get(@uri)
+    #parse the json
+    @show_crypto = JSON.parse(@response)
+
+    for x in @show_crypto
+      if @crypto_portfolio.symbol.upcase == x['symbol']
+        @rank = x['rank']
+        @name = x['name']
+        
+      end
+    end
   end
 
   # GET /crypto_portfolios/new
